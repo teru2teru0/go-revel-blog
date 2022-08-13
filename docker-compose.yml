@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ./docker/go
+      dockerfile: Dockerfile
+    tty: true # Docker Composeを使用して、コンテナを起動させた際にコンテナが終了してしまうのを防ぐ
+    volumes: # パスをボリュームとしてマウントする
+      - ".:/var/www/revel"
+    ports: # ポートを公開する。ホストとポートを指定
+      - 9000:9000
+    links:
+      - mysql
+
+  mysql:
+    build:
+      context: ./docker/mysql
+      dockerfile: Dockerfile
+    restart: always
+    platform: linux/x86_64 # M1 macの場合は、この設定を追加する
+    hostname: mysql
+    env_file:
+      - ./docker/mysql/env
+    ports:
+      - 3306:3306
+    volumes:
+      - "./mysql_data/mysql:/var/lib/mysql"
