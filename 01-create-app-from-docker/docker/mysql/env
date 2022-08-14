@@ -1,0 +1,6 @@
+TZ=Asia/Tokyo
+MYSQL_DATABASE=app_database
+MYSQL_USER=user
+MYSQL_PASSWORD=yourStrong(!)Password
+MYSQL_ALLOW_EMPTY_PASSWORD=yes
+MYSQL_ROOT_PASSWORD=yourStrong(!)Password
